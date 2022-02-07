@@ -1,0 +1,39 @@
+<label>Select Customer</label>
+<select ng-model="selectedCustomer"
+        ng-change="getAccountsByCustomersId($scope.selectedCustomer)">
+  <option ng-repeat="customer in customers" value="{{customer}}">{{customer.firstName}} {{customer.lastName}}</option>
+</select>
+
+<label>Select Account</label>
+<select ng-model="selectedAccount"
+        ng-change="showTranastionsHistory(selectedAccount.id)">
+  <option ng-repeat="account in customerAccounts" value="{{account}}">{{account.code}}</option>
+</select>
+
+<div class="row">
+  <h1>Account Transactions history</h1>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Amount</th>
+      <th>transaction type</th>
+      <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr data-ng-repeat="transaction in transactions"
+        ng-class="{'with-background-2': transaction.transactionType === 'DEPOSIT',
+        'with-background-1': transaction.transactionType !== 'DEPOSIT'}">
+      <td>{{ transaction.id}}</td>
+      <td>{{ transaction.amount}}</td>
+      <td>{{ transaction.transactionType}}</td>
+      <td>{{ transaction.createdAt | date}}</td>
+      <td>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
